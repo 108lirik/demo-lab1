@@ -8,7 +8,8 @@ sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources
 sudo apt-get update > /dev/null 2>&1
 sudo apt-get -y install jenkins > /dev/null 2>&1
 sudo apt-get install openjdk-8-jdk > /dev/null 2>&1
-sudo JAVA_HOME="/usr/lib/jvm/open-jdk"
+sudo export JAVA_HOME="/usr/lib/jvm/open-jdk"
+
 
 # Docker
 
@@ -21,21 +22,6 @@ sudo systemctl enable docker
 sudo usermod -aG docker ${USER}
 sudo usermod -aG docker jenkins
 sudo usermod -aG docker ubuntu
-
-
-# Saving Jenkins Initial Pass
-
-sudo cp /var/lib/jenkins/secrets/initialAdminPassword /vagrant/JenkinsPass.txt
-
-echo "Jenkins install complete, Initial Password is in a local project directory"
-echo ""
-echo ""
-echo ""
-
-
-# Install Maven
-echo "Install Maven"
-sudo apt-get -y install maven > /dev/null 2>&1
 
 # nginx
 
@@ -54,13 +40,27 @@ sudo ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/
 sudo service nginx restart
 sudo service jenkins restart
 
+# Saving Jenkins Initial Pass
+
+sudo cp /var/lib/jenkins/secrets/initialAdminPassword /vagrant/JenkinsPass.txt
+
+echo "Jenkins install complete, Initial Password is in a local project directory"
+echo ""
+echo ""
+echo ""
+
+
+
+# Install Maven
+
+echo "Install Maven"
+sudo apt-get -y install maven > /dev/null 2>&1
 
 
 # Install Git
 
 echo "Install Git"
 sudo apt-get install -y git-core > /dev/null 2>&1
-
 
 
 # Install Ansible
