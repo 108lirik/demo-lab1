@@ -1,4 +1,4 @@
 [env]
-qa     ansible_connection=ssh        ansible_user=vagrant
-stage     ansible_connection=ssh        ansible_user=vagrant
-dev     ansible_connection=ssh        ansible_user=vagrant
+qa     ansible_connection=ssh        ansible_user=root
+stage     ansible_connection=ssh        ansible_user=root
+dev     ansible_connection=ssh        ansible_user=root
