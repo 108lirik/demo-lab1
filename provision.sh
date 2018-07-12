@@ -54,5 +54,4 @@ sudo artifactory-oss-5.1.3/bin/artifactoryctl start
 echo "DONE!"
 echo ""
 echo ""
-echo "Jenkins password:"
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+sudo cp /var/lib/jenkins/secrets/initialAdminPassword /vagrant/JenkinsPass.txt
