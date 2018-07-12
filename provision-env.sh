@@ -13,8 +13,8 @@ sudo usermod -aG docker ${USER}
 sudo usermod -aG docker jenkins
 sudo usermod -aG docker ubuntu
 
-
-
+#Install Java
+sudo apt-get install openjdk-8-jdk > /dev/null 2>&1
 
 # Docker Compose
 
