@@ -1,5 +1,4 @@
 [env]
 master ansible_ssh_host=192.168.33.55 ansible_ssh_user=root
 dev    ansible_ssh_host=192.168.33.56 ansible_ssh_user=root
-stage  ansible_ssh_host=192.168.33.57 ansible_ssh_user=root
-qa     ansible_ssh_host=192.168.33.58 ansible_ssh_user=root
+qa     ansible_ssh_host=192.168.33.57 ansible_ssh_user=root
