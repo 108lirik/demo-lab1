@@ -8,7 +8,7 @@ sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources
 sudo apt-get update > /dev/null 2>&1
 sudo apt-get -y install jenkins > /dev/null 2>&1
 sudo apt-get install openjdk-8-jdk > /dev/null 2>&1
-sudo export JAVA_HOME="/usr/lib/jvm/open-jdk"
+sudo systemctl start jenkins 
 
 
 # Docker
@@ -22,33 +22,6 @@ sudo systemctl enable docker
 sudo usermod -aG docker ${USER}
 sudo usermod -aG docker jenkins
 sudo usermod -aG docker ubuntu
-
-# nginx
-
-echo "Installing nginx"
-sudo apt-get -y install nginx > /dev/null 2>&1
-sudo service nginx start
-
-
-# Configuring nginx
-
-echo "Configuring nginx"
-cd /etc/nginx/sites-available
-sudo rm default ../sites-enabled/default
-sudo cp /vagrant/jenkins /etc/nginx/sites-available/
-sudo ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/
-sudo service nginx restart
-sudo service jenkins restart
-
-# Saving Jenkins Initial Pass
-
-sudo cp /var/lib/jenkins/secrets/initialAdminPassword /vagrant/JenkinsPass.txt
-
-echo "Jenkins install complete, Initial Password is in a local project directory"
-echo ""
-echo ""
-echo ""
-
 
 
 # Install Maven
@@ -70,4 +43,17 @@ sudo apt-get update > /dev/null 2>&1
 sudo apt-get install -y ansible > /dev/null 2>&1
 sudo apt-get install python-software-properties > /dev/null 2>&1
 sudo cp /vagrant/ansible/hosts /etc/ansible/
+
+
+#Install Artifactory
+sudo apt-get update > /dev/null 2>&1
+sudo apt-get install -y curl > /dev/null 2>&1
+sudo curl -L https://api.bintray.com/content/jfrog/artifactory/jfrog-artifactory-oss-6.1.0;bt_package=jfrog-artifactory-oss-zip -o /opt/artifactory
+unzip /opt/artifactory/jfrog-artifactory-oss-6.1.0.zip
+sudo chmod +x /opt/artifactory/jfrog-artifactory-oss-6.1.0/bin/installService.sh
+sudo ./opt/artifactory/jfrog-artifactory-oss-6.1.0/bin/installService.sh
 echo "DONE!"
+echo ""
+echo ""
+echo "Jenkins password:"
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
