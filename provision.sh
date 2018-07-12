@@ -46,12 +46,10 @@ sudo cp /vagrant/ansible/hosts /etc/ansible/
 
 
 #Install Artifactory
-sudo apt-get update > /dev/null 2>&1
-sudo apt-get install -y curl > /dev/null 2>&1
-sudo curl -L https://api.bintray.com/content/jfrog/artifactory/jfrog-artifactory-oss-6.1.0;bt_package=jfrog-artifactory-oss-zip -o /opt/artifactory
-unzip /opt/artifactory/jfrog-artifactory-oss-6.1.0.zip
-sudo chmod +x /opt/artifactory/jfrog-artifactory-oss-6.1.0/bin/installService.sh
-sudo ./opt/artifactory/jfrog-artifactory-oss-6.1.0/bin/installService.sh
+sudo apt-get install unzip > /dev/null 2>&1
+sudo wget https://bintray.com/jfrog/artifactory/download_file?file_path=jfrog-artifactory-oss-5.1.3.zip
+sudo unzip download_file?file_path=jfrog-artifactory-oss-5.1.3.zip
+sudo artifactory-oss-5.1.3/bin/artifactoryctl start
 echo "DONE!"
 echo ""
 echo ""
