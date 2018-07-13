@@ -13,31 +13,31 @@ IP3 = "192.168.33.57"
 
 Vagrant.configure("2") do |config|
 
-  config.vm.provider :virtualbox do |box|
-      box.linked_clone = true
-      box.customize [ "modifyvm", :id, "--memory", BOX_RAM_MB, "--cpus", BOX_CPU_COUNT ]
+  config.vm.provider :virtualbox do |subconfig|
+      subconfig.linked_clone = true
+      subconfig.customize [ "modifyvm", :id, "--memory", BOX_RAM_MB, "--cpus", BOX_CPU_COUNT ]
   end
   
-  config.vm.define :jenkins do |box|
-      box.vm.hostname = "jenkins"
-      box.vm.box = BOX_BASE
-      box.vm.network "private_network", ip: IP1
-      box.vm.synced_folder ".", "/vagrant"
+  config.vm.define :jenkins do |subconfig|
+      subconfig.vm.hostname = "jenkins"
+      subconfig.vm.box = BOX_BASE
+      subconfig.vm.network "private_network", ip: IP1
+      subconfig.vm.synced_folder ".", "/vagrant"
     
-      box.vm.provision :shell,
+      subconfig.vm.provision :shell,
           :path => "provision.sh",
           :args => "master", 
           :preserve_order => true,
           :run => "always"
   end
   
-    config.vm.define :dev do |box|
-      box.vm.hostname = "dev"
-      box.vm.box = BOX_BASE
-      box.vm.network "private_network", ip: IP2
-      box.vm.synced_folder ".", "/vagrant"
+    config.vm.define :dev do |subconfig|
+      subconfig.vm.hostname = "dev"
+      subconfig.vm.box = BOX_BASE
+      subconfig.vm.network "private_network", ip: IP2
+      subconfig.vm.synced_folder ".", "/vagrant"
     
-      box.vm.provision :shell,
+      subconfig.vm.provision :shell,
           :path => "provision-env.sh",
           :args => "slave", 
           :preserve_order => true,
@@ -45,13 +45,13 @@ Vagrant.configure("2") do |config|
   end
   
       
-      config.vm.define :qa do |box|
-      box.vm.hostname = "qa"
-      box.vm.box = BOX_BASE
-      box.vm.network "private_network", ip: IP3
-      box.vm.synced_folder ".", "/vagrant"
+      config.vm.define :qa do |subconfig|
+      subconfig.vm.hostname = "qa"
+      subconfig.vm.box = BOX_BASE
+      subconfig.vm.network "private_network", ip: IP3
+      subconfig.vm.synced_folder ".", "/vagrant"
     
-      box.vm.provision :shell,
+      subconfig.vm.provision :shell,
           :path => "provision-env.sh",
           :args => "slave", 
           :preserve_order => true,
