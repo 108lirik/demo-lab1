@@ -10,8 +10,7 @@ sudo apt-get update > /dev/null 2>&1
 sudo apt-get -y install docker-ce > /dev/null 2>&1
 sudo systemctl enable docker
 sudo usermod -aG docker ${USER}
-sudo usermod -aG docker jenkins
-sudo usermod -aG docker ubuntu
+
 
 #Install Java
 sudo apt-get install openjdk-8-jdk > /dev/null 2>&1
