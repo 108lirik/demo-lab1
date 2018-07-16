@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 # Jenkins & Java
 
@@ -20,8 +20,6 @@ sudo apt-get update
 sudo apt-get -y install docker-ce > /dev/null 2>&1
 sudo systemctl enable docker
 sudo usermod -aG docker ${USER}
-sudo usermod -aG docker jenkins
-sudo usermod -aG docker ubuntu
 
 
 # Install Maven

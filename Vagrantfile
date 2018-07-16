@@ -4,7 +4,7 @@
 
 BOX_BASE = "ubuntu/xenial64"  
 # amount of RAM for Vagrant box
-BOX_RAM_MB = "2048"  
+BOX_RAM_MB = "1024"  
 # number of CPUs for Vagrant box
 BOX_CPU_COUNT = "1"
 IP1 = "192.168.33.55"
@@ -23,7 +23,9 @@ Vagrant.configure("2") do |config|
       subconfig.vm.box = BOX_BASE
       subconfig.vm.network "private_network", ip: IP1
       subconfig.vm.synced_folder ".", "/vagrant"
-    
+      subconfig.vm.provider :virtualbox do |vb|
+          vb.customize ["modifyvm", :id, "--memory", "2048"]
+      end
       subconfig.vm.provision :shell,
           :path => "provision.sh",
           :args => "master", 
