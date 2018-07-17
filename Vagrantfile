@@ -23,9 +23,9 @@ Vagrant.configure("2") do |config|
       subconfig.vm.box = BOX_BASE
       subconfig.vm.network "private_network", ip: IP1
       subconfig.vm.synced_folder ".", "/vagrant"
-      subconfig.vm.provider :virtualbox do |vb|
-          vb.customize ["modifyvm", :id, "--memory", "2048"]
-      end
+#      subconfig.vm.provider :virtualbox do |vb|
+#          vb.customize ["modifyvm", :id, "--memory", "1536"]
+#      end
       subconfig.vm.provision :shell,
           :path => "provision.sh"
 
