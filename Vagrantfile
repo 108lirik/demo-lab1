@@ -27,36 +27,33 @@ Vagrant.configure("2") do |config|
           vb.customize ["modifyvm", :id, "--memory", "2048"]
       end
       subconfig.vm.provision :shell,
-          :path => "provision.sh",
-          :args => "master", 
-          :preserve_order => true,
-          :run => "always"
+          :path => "provision.sh"
+
+      subconfig.vm.provision "docker" do |d|
+        d.run "registry:2",
+        args: "-d -p 5000:5000 --restart=always --name registry"
+      end
+
   end
   
-    config.vm.define :dev do |subconfig|
+  config.vm.define :dev do |subconfig|
       subconfig.vm.hostname = "dev"
       subconfig.vm.box = BOX_BASE
       subconfig.vm.network "private_network", ip: IP2
       subconfig.vm.synced_folder ".", "/vagrant"
     
       subconfig.vm.provision :shell,
-          :path => "provision-env.sh",
-          :args => "slave", 
-          :preserve_order => true,
-          :run => "always"
+          :path => "provision-env.sh"
   end
   
       
-      config.vm.define :qa do |subconfig|
+  config.vm.define :qa do |subconfig|
       subconfig.vm.hostname = "qa"
       subconfig.vm.box = BOX_BASE
       subconfig.vm.network "private_network", ip: IP3
       subconfig.vm.synced_folder ".", "/vagrant"
     
       subconfig.vm.provision :shell,
-          :path => "provision-env.sh",
-          :args => "slave", 
-          :preserve_order => true,
-          :run => "always"
-      end
+          :path => "provision-env.sh"
+  end
 end
