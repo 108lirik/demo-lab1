@@ -50,6 +50,8 @@ cd /
 sudo wget -O jfrog-artifactory-oss-5.1.3.zip https://bintray.com/jfrog/artifactory/download_file?file_path=jfrog-artifactory-oss-5.1.3.zip > /dev/null 2>&1
 sudo unzip jfrog-artifactory-oss-5.1.3.zip > /dev/null 2>&1
 sudo artifactory-oss-5.1.3/bin/artifactoryctl start
+sudo /artifactory-oss-5.1.3/bin/installService.sh
+sudo systemctl enable artifactory
 echo "DONE!"
 echo ""
 echo ""

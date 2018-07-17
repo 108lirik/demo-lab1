@@ -1,3 +1,4 @@
 JenkinsPass.txt
 *console.log
 /.vagrant/
+*.jar
