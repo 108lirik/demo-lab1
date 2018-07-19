@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 
 RUN mkdir -p /opt/demo
-COPY demo-0.0.6-SNAPSHOT.jar /opt/demo/
+COPY app.jar /opt/demo/
 WORKDIR /opt/demo/
 
-CMD ["java", "-jar", "/opt/demo/demo-0.0.6-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/opt/demo/app.jar"]
